@@ -1,5 +1,7 @@
 \name{krls}
 \alias{krls}
+\alias{krls.default}
+\alias{krls.formula}
 \title{
 Kernel-based Regularized Least Squares (KRLS)
 }
@@ -8,9 +10,10 @@ Kernel-based Regularized Least Squares (KRLS)
 Function implements Kernel-Based Regularized Least Squares (KRLS), a machine learning method described in Hainmueller and Hazlett (2014) that allows users to solve regression and classification problems without manual specification search and strong functional form assumptions. KRLS finds the best fitting function by minimizing a Tikhonov regularization problem with a squared loss, using Gaussian Kernels as radial basis functions. KRLS reduces misspecification bias since it learns the functional form from the data. Yet, it nevertheless allows for interpretability and inference in ways similar to ordinary regression models. In particular, KRLS provides closed-form estimates for the predicted values, variances, and the pointwise partial derivatives that characterize the marginal effects of each independent variable at each data point in the covariate space. The distribution of pointwise marginal effects can be used to examine effect heterogeneity and or interactions. 
 }
 \usage{
-krls(X = NULL, y = NULL, whichkernel = "gaussian", lambda = NULL,
+\method{krls}{default}(X = NULL, y = NULL, whichkernel = "gaussian", lambda = NULL,
 sigma = NULL, derivative = TRUE, binary= TRUE, vcov=TRUE, 
-print.level = 1,L=NULL,U=NULL,tol=NULL,eigtrunc=NULL)
+print.level = 1,L=NULL,U=NULL,tol=NULL,eigtrunc=NULL,\dots)
+\method{krls}{formula}(form, data, \dots)
 }
 
 \arguments{
@@ -20,6 +23,8 @@ print.level = 1,L=NULL,U=NULL,tol=NULL,eigtrunc=NULL)
   \item{y}{
 \var{N} by \var{1} data numeric matrix or vector that contains the values of the response variable for all observations. This vector may not contain missing values. 
 }
+  \item{form}{A formula specifying the predictor variables and the response variable.}
+  \item{data}{A data frame which will be used to generate the model matrix from the formula.}
   \item{whichkernel}{
 String vector that specifies which kernel should be used. Must be one of \code{gaussian}, \code{linear}, \code{poly1}, \code{poly2}, \code{poly3}, or \code{poly4} (see details). Default is \code{gaussian}.
 }
@@ -60,6 +65,7 @@ Positive scalar that determines the tolerance used in the optimization routine u
 Positive scalar that determines how much eignvalues should be trunacted for finding the upper bound of the search window in the algorithm outlined in \code{\link{lambdasearch}}. If \code{eigtrunc} is set to \var{10^-6} this means that we keep only eigenvalues that are \var{10^-6} as large as the first. Default is \code{eigtrunc=NULL} which means no truncation is used. 
 }
 
+\item{\dots}{Other arguments to be passed down to functions, currently unimplemented.}
 }
 \details{
 

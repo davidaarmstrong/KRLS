@@ -8,7 +8,6 @@ function(x,
          probs = c(.25,.75),
          ...)
       {
-            
         if( class(x)!= "krls" ){
         warning("x not of class 'krls'")
         UseMethod("summary")
@@ -53,7 +52,6 @@ if(2 %in% which){ nplots <- nplots + d}
          
           if(1 %in% which){ # histograms of partial derivatives
           form <-  as.formula(paste("~",paste(colnames(x$derivatives),collapse="+"),sep=""))
-          require(lattice)
           
           print(histogram(form,
                     data=data.frame(x$derivatives),

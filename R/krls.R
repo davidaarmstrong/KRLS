@@ -1,4 +1,9 @@
-krls <-
+krls <- function(...){
+	UseMethod("krls")
+}
+
+
+krls.default <-
 function(     X=NULL,
               y=NULL,
               whichkernel="gaussian",
@@ -11,7 +16,7 @@ function(     X=NULL,
               L=NULL,
               U=NULL,
               tol=NULL,
-							eigtrunc=NULL){
+							eigtrunc=NULL,...){
               
       # checks
       y <- as.matrix(y)
@@ -269,3 +274,9 @@ function(     X=NULL,
             
 }
 
+krls.formula <- function(form, data, ...){
+    X <- model.matrix(form, data)[,-1]
+    y <- model.response(model.frame(form, data))
+    out <- krls.default(X,y, ...)
+    return(out)
+}

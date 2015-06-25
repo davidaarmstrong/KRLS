@@ -1,2 +1,7 @@
-export(gausskernel,krls,looloss,predict.krls,solveforc,summary.krls,plot.krls)
-
+import(lattice)
+S3method(krls, formula)
+S3method(krls, default)
+S3method(predict, krls)
+S3method(plot, krls)
+S3method(summary, krls)
+export(gausskernel,krls,krls.default, krls.formula,looloss,predict.krls,solveforc,summary.krls,plot.krls)
